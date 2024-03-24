@@ -4,13 +4,13 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)
 
+<h3 align="center">QDraw</h3>
+<p align="center">
+    Google's Quick Draw reimagination using quantum computing.
+</p>
+
 > [!IMPORTANT]  
 > This project is not finished yet, bugs are expected.
-
-<h1 align="center">QDraw</h1>
-<p align="center">
-    Google's Quick Draw reimagination using quantum computing, enhancing sketch recognition and parallel processing capabilities of quantum processors. 
-</p>
 
 # Introduction
 

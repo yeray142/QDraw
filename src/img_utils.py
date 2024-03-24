@@ -1,7 +1,3 @@
-import cv2 as cv
-import numpy as np
-
-
 def scale_down_coordinate(coordinate, old_size, new_size):
     """
     Scale down a single coordinate from old_size to new_size.
@@ -85,26 +81,3 @@ def print_image(image):
     """
     for row in image:
         print(''.join(['#' if pixel else ' ' for pixel in row]))
-
-
-# Example sketch data for a cell phone
-cell_phone_sketch = [
-    [[9, 9], [32, 32]],
-    [[9, 12, 8, 9, 6, 8, 0, 9, 64, 109, 114, 136, 150, 155, 150, 153, 150, 149, 135, 93, 28, 14, 11, 14, 12],
-     [32, 72, 124, 144, 156, 186, 244, 250, 253, 250, 253, 255, 247, 199, 139, 81, 24, 20, 12, 2, 3, 6, 11, 29, 44]],
-    [[12, 145, 147], [47, 50, 53]],
-    [[8, 14, 70, 102, 141, 147], [206, 212, 213, 217, 216, 219]],
-    [[87, 76, 67, 62, 66, 76, 88, 89, 87, 76], [228, 225, 226, 235, 240, 243, 229, 225, 220, 220]],
-    [[68, 100], [24, 24]]
-]
-
-# Convert the sketch to a grayscale image and print it
-image = convert_sketch_to_image(cell_phone_sketch)
-
-# Assuming 'image' is the 2D list returned from your 'convert_sketch_to_image' function
-image_np = np.array(image, dtype=np.uint8)  # Convert the list to a NumPy array of type uint8
-
-cv.imshow('Cell Phone Sketch', image_np)  # Display the image in a window titled 'Cell Phone Sketch'
-cv.waitKey(0)  # Wait indefinitely for a key press
-cv.destroyAllWindows()  # Close all OpenCV windows
-

@@ -1,7 +1,16 @@
 import matplotlib.pyplot as plt
+from typing import List
 
 
-def plot_doodle(img_lines):
+def plot_doodle(img_lines: List[List[int]]) -> None:
+    """
+    Plot doodles using matplotlib
+    Args:
+        img_lines: doodle img lines.
+
+    Returns: None
+
+    """
     # Setup the plot
     plt.figure(figsize=(10, 10))
     plt.axis('equal')

@@ -6,7 +6,7 @@
 
 <p align="center">
     <br>
-    <a href="https://example.com/">
+    <a href="https://qml.cvc.uab.es/">
         <img src="https://i.imgur.com/wGBaBlS.png" width=200>
     </a>
     <h3 align="center">QDraw: Quantum Draw</h3>

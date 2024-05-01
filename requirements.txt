@@ -1,4 +1,4 @@
-matplotlib
+matplotlib~=3.7.5
 qiskit~=1.0.2
 qiskit-algorithms~=0.3.0
 qiskit-machine-learning~=0.7.2
@@ -7,3 +7,5 @@ opencv-python~=4.9.0.80
 numpy
 pandas
 torch~=2.2.1
+tensorflow
+pennylane

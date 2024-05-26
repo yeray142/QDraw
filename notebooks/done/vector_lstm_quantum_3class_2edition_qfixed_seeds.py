@@ -180,9 +180,9 @@ def create_qnn(n, seed):
 classes = ["calculator", "camera", "cell phone"]
 class_id = dict(zip(classes, range(len(classes))))
 
-calculator_data = np.load(f'../data/sketchrnn/sketchrnn_calculator.npz', allow_pickle=True, encoding='latin1')
-camera_data = np.load(f'../data/sketchrnn/sketchrnn_camera.npz', allow_pickle=True, encoding='latin1')
-cellphone_data = np.load(f'../data/sketchrnn/sketchrnn_cell_phone.npz', allow_pickle=True, encoding='latin1')
+calculator_data = np.load(f'../../data/sketchrnn/sketchrnn_calculator.npz', allow_pickle=True, encoding='latin1')
+camera_data = np.load(f'../../data/sketchrnn/sketchrnn_camera.npz', allow_pickle=True, encoding='latin1')
+cellphone_data = np.load(f'../../data/sketchrnn/sketchrnn_cell_phone.npz', allow_pickle=True, encoding='latin1')
 
 resized_calculator_drawings = resize_and_normalize_drawings(calculator_data, size=MAX_SEQ_LENGTH)
 resized_camera_drawings = resize_and_normalize_drawings(camera_data, size=MAX_SEQ_LENGTH)

@@ -198,8 +198,8 @@ def create_qnn(n, seed):
 classes = get_categories_from_data(data_folder)
 class_id = dict(zip(classes, range(len(classes))))
 
-camera_data = np.load(f'../data/sketchrnn/sketchrnn_camera.npz', allow_pickle=True, encoding='latin1')
-cellphone_data = np.load(f'../data/sketchrnn/sketchrnn_cell_phone.npz', allow_pickle=True, encoding='latin1')
+camera_data = np.load(f'../../data/sketchrnn/sketchrnn_camera.npz', allow_pickle=True, encoding='latin1')
+cellphone_data = np.load(f'../../data/sketchrnn/sketchrnn_cell_phone.npz', allow_pickle=True, encoding='latin1')
 
 resized_camera_drawings = resize_and_normalize_drawings(camera_data, size=MAX_SEQ_LENGTH)
 resized_cellphone_drawings = resize_and_normalize_drawings(cellphone_data, size=MAX_SEQ_LENGTH)

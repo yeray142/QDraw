@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle Classifier</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Draw your doodle</h2>
+    <canvas id="doodleCanvas" width="500" height="500"></canvas>
+    <button id="classifyBtn">Classify</button>
+
+    <script>
+        let strokes = [];
+        let currentStrokeX = [];
+        let currentStrokeY = [];
+
+        const canvas = document.getElementById('doodleCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        canvas.addEventListener('mousedown', e => {
+            drawing = true;
+            currentStrokeX = [];  // Start a new stroke for X coordinates
+            currentStrokeY = [];  // Start a new stroke for Y coordinates
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener('mousemove', e => {
+            if (drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                currentStrokeX.push(e.offsetX);  // Add X to current stroke
+                currentStrokeY.push(e.offsetY);  // Add Y to current stroke
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (currentStrokeX.length > 0 && currentStrokeY.length > 0) {
+                strokes.push([currentStrokeX, currentStrokeY]);  // Add the current stroke to the strokes array
+            }
+            drawing = false;
+        });
+
+        document.getElementById('classifyBtn').addEventListener('click', () => {
+            // Normalize strokes and ensure points are integers
+            const normalizedStrokes = normalizeStrokes(strokes, 255, 255);
+
+            fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ strokes: normalizedStrokes })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Prediction:', data.prediction);
+                // Reset strokes after sending
+                strokes = [];
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function normalizeStrokes(strokes, maxWidth, maxHeight) {
+        let maxX = 0, maxY = 0, minX = Infinity, minY = Infinity;
+
+        // Find the maximum and minimum x and y values
+        strokes.forEach(stroke => {
+            maxX = Math.max(maxX, ...stroke[0]);
+            maxY = Math.max(maxY, ...stroke[1]);
+            minX = Math.min(minX, ...stroke[0]);
+            minY = Math.min(minY, ...stroke[1]);
+        });
+
+        const scaleFactorX = maxX > maxWidth ? maxWidth / maxX : 1;
+        const scaleFactorY = maxY > maxHeight ? maxHeight / maxY : 1;
+
+        // Scale the strokes, round the points to integers, and align to top-left corner
+        return strokes.map(stroke => [
+            stroke[0].map(x => Math.round((x - minX) * scaleFactorX)),
+            stroke[1].map(y => Math.round((y - minY) * scaleFactorY))
+        ]);
+    }
+    </script>
+</body>
+</html>
